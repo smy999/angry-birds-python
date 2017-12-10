@@ -1,15 +1,19 @@
 from characters import Pig
+from characters import Pig_Big
 from polygon import Polygon
+from polygon_ice import Polygon_ice
 
 
 class Level():
-    def __init__(self, pigs, columns, beams, space):
+    def __init__(self, pigs, big_pigs, columns, beams, space):
         self.pigs = pigs
+        self.big_pigs = big_pigs
         self.columns = columns
         self.beams = beams
         self.space = space
         self.number = 0
-        self.number_of_birds = 4
+        self.number_of_birds = 1 #bird number -1
+        
         # lower limit
         self.one_star = 30000
         self.two_star = 40000
@@ -22,7 +26,7 @@ class Level():
         for i in range(n):
             y = y0+100+i*100
             p = (x, y)
-            self.columns.append(Polygon(p, 20, 85, self.space))
+            self.columns.append(Polygon_ice(p, 20, 85, self.space))
             p = (x+60, y)
             self.columns.append(Polygon(p, 20, 85, self.space))
             p = (x+30, y+50)
@@ -34,11 +38,11 @@ class Level():
         for i in range(n):
             y = y0+100+i*125
             p = (x+1, y+22)
-            self.columns.append(Polygon(p, 20, 85, self.space))
+            self.columns.append(Polygon_ice(p, 20, 85, self.space))
             p = (x+60, y+22)
             self.columns.append(Polygon(p, 20, 85, self.space))
             p = (x+30, y+70)
-            self.beams.append(Polygon(p, 85, 20, self.space))
+            self.beams.append(Polygon_ice(p, 85, 20, self.space))
             p = (x+30, y-30)
             self.beams.append(Polygon(p, 85, 20, self.space))
 
@@ -56,24 +60,34 @@ class Level():
             p = (x, y+85+i*85)
             self.columns.append(Polygon(p, 20, 85, self.space))
 
+    def vertical_pile_ice(self, x, y, n):
+        """Create a vertical pile"""
+        y += 10
+        for i in range(n):
+            p = (x, y+85+i*85)
+            self.columns.append(Polygon_ice(p, 20, 85, self.space))
+
     def build_0(self):
         """level 0"""
         pig1 = Pig(980, 100, self.space)
         pig2 = Pig(985, 182, self.space)
+        big_pig = Pig_Big(985, 250, self.space)
+        self.big_pigs.append(big_pig)
         self.pigs.append(pig1)
         self.pigs.append(pig2)
+        
         p = (950, 80)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (1010, 80)
         self.columns.append(Polygon(p, 20, 85, self.space))
         p = (980, 150)
-        self.beams.append(Polygon(p, 85, 20, self.space))
+        self.beams.append(Polygon_ice(p, 85, 20, self.space))
         p = (950, 200)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (1010, 200)
         self.columns.append(Polygon(p, 20, 85, self.space))
         p = (980, 240)
-        self.beams.append(Polygon(p, 85, 20, self.space))
+        self.beams.append(Polygon_ice(p, 85, 20, self.space))
         self.number_of_birds = 4
         if self.bool_space:
             self.number_of_birds = 8
@@ -86,11 +100,11 @@ class Level():
         pig = Pig(1000, 100, self.space)
         self.pigs.append(pig)
         p = (900, 80)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (850, 80)
         self.columns.append(Polygon(p, 20, 85, self.space))
         p = (850, 150)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (1050, 150)
         self.columns.append(Polygon(p, 20, 85, self.space))
         p = (1105, 210)
@@ -108,11 +122,11 @@ class Level():
         p = (880, 80)
         self.columns.append(Polygon(p, 20, 85, self.space))
         p = (880, 150)
-        self.beams.append(Polygon(p, 85, 20, self.space))
+        self.beams.append(Polygon_ice(p, 85, 20, self.space))
         p = (1000, 80)
         self.columns.append(Polygon(p, 20, 85, self.space))
         p = (1000, 180)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (1000, 210)
         self.beams.append(Polygon(p, 85, 20, self.space))
         self.number_of_birds = 4
@@ -130,14 +144,16 @@ class Level():
         pig = Pig(1005, 225, self.space)
         pig.life = 25
         self.pigs.append(pig)
+        big_pig = Pig_Big(700, 100, self.space)
+        self.big_pigs.append(big_pig)
         p = (1100, 100)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (1070, 152)
         self.beams.append(Polygon(p, 85, 20, self.space))
         p = (1040, 100)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (980, 100)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (920, 100)
         self.columns.append(Polygon(p, 20, 85, self.space))
         p = (950, 152)
@@ -147,11 +163,11 @@ class Level():
         p = (860, 100)
         self.columns.append(Polygon(p, 20, 85, self.space))
         p = (800, 100)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (830, 152)
-        self.beams.append(Polygon(p, 85, 20, self.space))
+        self.beams.append(Polygon_ice(p, 85, 20, self.space))
         p = (890, 180)
-        self.beams.append(Polygon(p, 85, 20, self.space))
+        self.beams.append(Polygon_ice(p, 85, 20, self.space))
         p = (860, 223)
         self.columns.append(Polygon(p, 20, 85, self.space))
         p = (920, 223)
@@ -167,9 +183,9 @@ class Level():
         p = (950, 300)
         self.beams.append(Polygon(p, 85, 20, self.space))
         p = (920, 350)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (980, 350)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (950, 400)
         self.beams.append(Polygon(p, 85, 20, self.space))
         self.number_of_birds = 4
@@ -199,11 +215,11 @@ class Level():
             self.beams.append(Polygon(p, 85, 20, self.space))
         for i in range(4):
             p = (1000, 70+i*21)
-            self.beams.append(Polygon(p, 85, 20, self.space))
+            self.beams.append(Polygon_ice(p, 85, 20, self.space))
         p = (970, 176)
         self.columns.append(Polygon(p, 20, 85, self.space))
         p = (1026, 176)
-        self.columns.append(Polygon(p, 20, 85, self.space))
+        self.columns.append(Polygon_ice(p, 20, 85, self.space))
         p = (1000, 230)
         self.beams.append(Polygon(p, 85, 20, self.space))
         self.number_of_birds = 4
@@ -323,6 +339,63 @@ class Level():
         if self.bool_space:
             self.number_of_birds = 8
 
+    def build_12(self):
+        """level 12"""
+        pig = Pig(1000, 180, self.space)
+        pig.life = 30
+        self.pigs.append(pig)
+        pig = Pig(1078, 280, self.space)
+        pig.life = 30
+        self.pigs.append(pig)
+        pig = Pig(900, 80, self.space)
+        pig.life = 30
+        self.pigs.append(pig)
+        big_pig = Pig_Big(840, 180, self.space)
+        self.big_pigs.append(big_pig)
+
+        self.open_flat(1050, 0, 3)
+        self.open_flat(963, 0, 2)
+        self.open_flat(880, 0, 1)
+        self.open_flat(797, 0, 1)
+        self.open_flat(714, 0, 2)
+        self.open_flat(631, 0, 3)
+        self.number_of_birds = 4
+        if self.bool_space:
+            self.number_of_birds = 8
+
+    def build_13(self):
+        """level 13"""
+        pig = Pig(920, 533, self.space)
+        pig.life = 40
+        self.pigs.append(pig)
+        big_pig = Pig_Big(1000, 100, self.space)
+        self.big_pigs.append(big_pig)
+        
+        self.closed_flat(895, 423, 1)
+        self.vertical_pile(900, 0, 4)
+        self.vertical_pile_ice(926, 0, 4)
+        self.vertical_pile(950, 0, 4)
+        self.number_of_birds = 4
+        if self.bool_space:
+            self.number_of_birds = 8
+
+    def build_14(self):
+        """level 14"""
+        big_pig = Pig_Big(1100, 100, self.space)
+        self.big_pigs.append(big_pig)
+        for i in range(9):
+            p = (600, 70+i*21)
+            self.beams.append(Polygon_ice(p, 85, 20, self.space))
+        for i in range(7):
+            p = (800, 70+i*21)
+            self.beams.append(Polygon_ice(p, 85, 20, self.space))
+        
+        for i in range(4):
+            p = (1000, 70+i*21)
+            self.beams.append(Polygon(p, 85, 20, self.space))
+        self.number_of_birds = 4
+        if self.bool_space:
+            self.number_of_birds = 8
     def load_level(self):
         try:
             build_name = "build_"+str(self.number)
