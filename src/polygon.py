@@ -24,7 +24,7 @@ class Polygon():
         self.column_image = wood2.subsurface(rect).copy()
 
     def to_pygame(self, p):
-        """Convert pymunk to pygame coordinates"""
+        """Convert pymunk to pygame coor dinates"""
         return int(p.x), int(-p.y+600)
 
     def draw_poly(self, element, screen):
@@ -56,3 +56,5 @@ class Polygon():
             p = p - offset
             np = p
             screen.blit(rotated_logo_img, (np.x, np.y))
+
+
